@@ -4,18 +4,8 @@
     <link rel="stylesheet" href="/css/materialize.min.css">
 
     <script type="text/javascript">
-        function geta(arg0,arg1) {
-            htmlobj=$.ajax({url:"/agentQuery?role="+arg0+"&roleName="+arg1,async:false});
-            $("#content").html(htmlobj.responseText);
-        }
-
-        function dev() {
-            htmlobj=$.ajax({url:"/developAgent",async:false});
-            $("#content").html(htmlobj.responseText);
-        }
-
-        function book() {
-            htmlobj=$.ajax({url:"/authBook",async:false});
+        function get(arg0) {
+            htmlobj=$.ajax({url:"/"+arg0,async:false});
             $("#content").html(htmlobj.responseText);
         }
     </script>
@@ -32,20 +22,23 @@
 <#--profile-->
     <li class="grey lighten-3">
         <div class="row" style="padding: 8px;">
-            <div class="col m6 grey lighten-5" style="height: 90px;width: 90px;"></div>
+            <div class="col m6" style="height: 90px;width: 110px;">
+                <img style="width: 90px;" src="/images/${roleName}.png"/>
+            </div>
+
             <div class="col m6">
-            <@shiro.principal/><br>
-            <#list roleNames as roleName>${roleName}<br></#list>
+                <strong><@shiro.principal/></strong><br>
+                ${roleName}
             </div>
 
         </div>
     </li>
 
     <@shiro.hasPermission name="support:agent">
-         <li class="bold"><a class="collapsible-header waves-effect waves-teal" href="javascript:dev();">开发代理</a>
+         <li class="bold"><a class="collapsible-header waves-effect waves-teal" href="javascript:get('developAgent');">开发代理</a>
     </@shiro.hasPermission>
 
-    <li class="bold"><a class="collapsible-header waves-effect waves-teal" href="javascript:book();">查看授权书</a>
+    <li class="bold"><a class="collapsible-header waves-effect waves-teal" href="javascript:get('authBook');">查看授权书</a>
 
     <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
@@ -53,7 +46,7 @@
                 <div class="collapsible-body">
                     <ul>
                         <#list allRoles as role>
-                            <li><a href="javascript:geta('${role.role}','${role.description}')" >${role.description}</a></li>
+                            <li><a href="javascript:get('agentQuery?role=${role.role}&roleName=${role.description}')" >${role.description}</a></li>
                         </#list>
                     </ul>
                 </div>
@@ -62,9 +55,9 @@
             <li class="bold"><a class="collapsible-header waves-effect waves-teal">系统管理</a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="badges.html">添加代理</a></li>
-                        <li><a href="buttons.html">管理代理</a></li>
-                        <li><a href="breadcrumbs.html">权限变更<span class="new badge"></span></a></li>
+                        <li><a href="javascript:void(0);">添加代理</a></li>
+                        <li><a href="javascript:void(0);">管理代理</a></li>
+                        <li><a href="javascript:get('updatePermission');">权限变更<span class="new badge"></span></a></li>
                     </ul>
                 </div>
             </li>

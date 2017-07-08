@@ -36,11 +36,11 @@
             <div class="row">
                 <div class="input-field col m5">
                     <input id="username" name="username" type="text" class="validate">
-                    <label for="username">账号</label>
+                    <label for="username">新建账号</label>
                 </div>
                 <div class="input-field col m5">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">密码</label>
+                    <input id="password" type="text" class="validate">
+                    <label for="password">设置密码</label>
                 </div>
             </div>
 

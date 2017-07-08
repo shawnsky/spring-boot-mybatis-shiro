@@ -3,7 +3,7 @@ package com.xt.entity;
 import java.io.Serializable;
 
 
-public class RolePermssion implements Serializable {
+public class RolePermission implements Serializable {
 
     private Long roleId;
     private Long permissionId;
@@ -29,7 +29,7 @@ public class RolePermssion implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RolePermssion that = (RolePermssion) o;
+        RolePermission that = (RolePermission) o;
 
         if (permissionId != null ? !permissionId.equals(that.permissionId) : that.permissionId != null) return false;
         if (roleId != null ? !roleId.equals(that.roleId) : that.roleId != null) return false;
@@ -46,7 +46,7 @@ public class RolePermssion implements Serializable {
 
     @Override
     public String toString() {
-        return "RolePermssion{" +
+        return "RolePermission{" +
                 "roleId=" + roleId +
                 ", permissionId=" + permissionId +
                 '}';

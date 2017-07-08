@@ -39,7 +39,8 @@ public class BaseController {
         //用户角色名
         Subject subject = SecurityUtils.getSubject();
         Set<String> roleNames = userService.findRoleNames(subject.getPrincipal().toString());
-        model.addAttribute("roleNames",roleNames);
+        String roleName = roleNames.iterator().next();
+        model.addAttribute("roleName",roleName);
 
         //所有角色
         List<Role> allRoles = roleService.findAll();
@@ -100,6 +101,12 @@ public class BaseController {
     @RequestMapping("/authBook")
     public String authBook(Model model){
         return "auth_book";
+    }
+
+
+    @RequestMapping("/updatePermission")
+    public String updatePermission(){
+        return "update_permission";
     }
 
 

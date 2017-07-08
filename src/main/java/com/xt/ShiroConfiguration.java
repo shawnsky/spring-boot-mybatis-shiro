@@ -55,7 +55,7 @@ public class ShiroConfiguration {
 
     /**
      * Gets eh cache manager.
-     * 缓存管理器
+     * 缓存管理器，暂时用ehcache实现
      * @return the eh cache manager
      */
     @Bean(name = "shiroEhcacheManager")
