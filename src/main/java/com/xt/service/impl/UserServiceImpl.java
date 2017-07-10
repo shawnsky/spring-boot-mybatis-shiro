@@ -4,6 +4,7 @@ package com.xt.service.impl;/**
 
 import com.xt.entity.User;
 import com.xt.mapper.UserMapper;
+import com.xt.service.RoleService;
 import com.xt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,13 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleService roleService;
 
 
     @Override
-    public User createUser(User user) {
-        return userMapper.createUser(user);
+    public void createUser(User user) {
+        userMapper.createUser(user);
     }
 
     @Override
@@ -37,6 +40,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) {
         userMapper.deleteUser(userId);
+    }
+
+    @Override
+    public void deleteUserByRole(String role) {
+        userMapper.deleteUserByRole(role);
     }
 
     @Override

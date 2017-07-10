@@ -19,6 +19,30 @@
         role_id = #{roleId,jdbcType=BIGINT} AND permission_id = #{permissionId,jdbcType=BIGINT}
     </delete>
 
+    <delete id="removeAll">
+        DELETE FROM sys_role_permission
+        WHERE
+        1 = 1
+    </delete>
+
+    <delete id="removeByRole" parameterType="String">
+        DELETE rp FROM sys_role_permission rp, sys_roles r
+        WHERE
+        r.role = #{value,jdbcType=VARCHAR} AND rp.role_id = r.id
+    </delete>
+
+    <select id="findPermissionsByRole" parameterType="String" resultType="String">
+        SELECT p.permission FROM sys_roles r, sys_role_permission rp, sys_permissions p
+        WHERE
+        r.role = #{value,jdbcType=VARCHAR} AND r.id = rp.role_id AND p.id = rp.permission_id
+    </select>
+
+    <select id="findRolesByPermission" parameterType="String" resultType="String">
+        SELECT r.role FROM sys_roles r, sys_role_permission rp, sys_permissions p
+        WHERE
+        p.permission = #{value,jdbcType=VARCHAR} AND p.id = rp.permission_id AND r.id = rp.role_id
+    </select>
+
 
 
 

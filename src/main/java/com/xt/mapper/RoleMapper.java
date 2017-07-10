@@ -11,11 +11,13 @@ import java.util.Set;
  */
 public interface RoleMapper {
 
-    User createRole(Role role);
+    void createRole(Role role);
 
     void deleteRole(Long roleId);
 
     Role findById(Long roleId);
+
+    Role findByRole(String role);
 
     List<Role> findAll();
 

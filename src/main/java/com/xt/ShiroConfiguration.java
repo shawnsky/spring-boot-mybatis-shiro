@@ -218,6 +218,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/developAgent", "perms[support:agent]");
         filterChainDefinitionMap.put("/authBook","perms[data:authbook]");
+        filterChainDefinitionMap.put("/admin/**","roles[admin]");
         filterChainDefinitionMap.put("/login", "authc");
         filterChainDefinitionMap.put("/logout", "logout");
         filterChainDefinitionMap.put("/**", "user");

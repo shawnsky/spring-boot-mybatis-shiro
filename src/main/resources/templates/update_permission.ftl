@@ -1,189 +1,71 @@
+<div id="innerContent">
+    <div id="card" class="card" style="padding: 16px;margin: 16px;">
 
-<script type="text/javascript">
-    $("#card").ready(function(){
+        <h4 class="header">权限变更</h4>
 
-         $("#test1").attr("checked",true);
+        <form action="/admin/updatePermissionSubmit" method="post" id="updateForm">
 
-    });
-</script>
 
-<div id="card" class="card" style="padding: 16px;margin: 16px;">
+        <#assign keys=prMap?keys/>
+        <#list keys as key>
+            <div class="row">
+            ${key}
+                <div class="row">
+                    <#list roles as role>
+                    <div class="col m2">
+                        <p>
+                            <input type="checkbox" name="${key}${role.role}" id="${key}${role.role}" />
+                            <label for="${key}${role.role}">${role.description}</label>
+                        </p>
+                    </div>
+                    </#list>
 
-    <h4 class="header">权限变更</h4>
-
-    <div class="row">
-        <div class="col m6">
-            电子授权书
-            <div>
-                <p>
-                    <input type="checkbox" id="test1" />
-                    <label for="test1">特约美丽顾问</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test2" checked="checked" />
-                    <label for="test2">二级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test3" checked="checked" />
-                    <label for="test3">一级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test4" checked="checked" />
-                    <label for="test4">全国总代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test5" checked="checked" />
-                    <label for="test5">战略合作伙伴</label>
-                </p>
+                    <#--<div class="col m2">-->
+                        <#--<p>-->
+                            <#--<input type="checkbox" name="${key}ejdls" id="${key}ejdls" />-->
+                            <#--<label for="${key}ejdls">二级代理商</label>-->
+                        <#--</p>-->
+                    <#--</div>-->
+                    <#--<div class="col m2">-->
+                        <#--<p>-->
+                            <#--<input type="checkbox" name="${key}yjdls" id="${key}yjdls" />-->
+                            <#--<label for="${key}yjdls">一级代理商</label>-->
+                        <#--</p>-->
+                    <#--</div>-->
+                    <#--<div class="col m2">-->
+                        <#--<p>-->
+                            <#--<input type="checkbox" name="${key}qgzdls" id="${key}qgzdls" />-->
+                            <#--<label for="${key}qgzdls">全国总代理商</label>-->
+                        <#--</p>-->
+                    <#--</div>-->
+                    <#--<div class="col m2">-->
+                        <#--<p>-->
+                            <#--<input type="checkbox" name="${key}zlhzhb" id="${key}zlhzhb" />-->
+                            <#--<label for="${key}zlhzhb">战略合作伙伴</label>-->
+                        <#--</p>-->
+                    <#--</div>-->
+                </div>
+                <hr>
+                <#list prMap[key] as val>
+                    <script type="text/javascript">
+                        $("#${key}${val}").attr("checked",true);
+                    </script>
+                </#list>
             </div>
-        </div>
+        </#list>
+            <button class="btn" type="submit">提交</button>
 
-        <div class="col m6">
-            学习辅导
-            <div>
-                <p>
-                    <input type="checkbox" id="test1" checked="checked" />
-                    <label for="test1">特约美丽顾问</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test2" checked="checked" />
-                    <label for="test2">二级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test3" checked="checked" />
-                    <label for="test3">一级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test4" checked="checked" />
-                    <label for="test4">全国总代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test5" checked="checked" />
-                    <label for="test5">战略合作伙伴</label>
-                </p>
-            </div>
-        </div>
+        </form>
+
+
+
+
+
 
     </div>
-
-
-    <div class="row">
-        <div class="col m6">
-            高层会议
-            <div>
-                <p>
-                    <input type="checkbox" id="test1" checked="checked" />
-                    <label for="test1">特约美丽顾问</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test2" checked="checked" />
-                    <label for="test2">二级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test3" checked="checked" />
-                    <label for="test3">一级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test4" checked="checked" />
-                    <label for="test4">全国总代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test5" checked="checked" />
-                    <label for="test5">战略合作伙伴</label>
-                </p>
-            </div>
-        </div>
-
-        <div class="col m6">
-            开发代理
-            <div>
-                <p>
-                    <input type="checkbox" id="test1" checked="checked" />
-                    <label for="test1">特约美丽顾问</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test2" checked="checked" />
-                    <label for="test2">二级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test3" checked="checked" />
-                    <label for="test3">一级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test4" checked="checked" />
-                    <label for="test4">全国总代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test5" checked="checked" />
-                    <label for="test5">战略合作伙伴</label>
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col m6">
-            退换货
-            <div>
-                <p>
-                    <input type="checkbox" id="test1" checked="checked" />
-                    <label for="test1">特约美丽顾问</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test2" checked="checked" />
-                    <label for="test2">二级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test3" checked="checked" />
-                    <label for="test3">一级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test4" checked="checked" />
-                    <label for="test4">全国总代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test5" checked="checked" />
-                    <label for="test5">战略合作伙伴</label>
-                </p>
-            </div>
-        </div>
-
-        <div class="col m6">
-            包邮政策
-            <div>
-                <p>
-                    <input type="checkbox" id="test1" checked="checked" />
-                    <label for="test1">特约美丽顾问</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test2" checked="checked" />
-                    <label for="test2">二级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test3" checked="checked" />
-                    <label for="test3">一级代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test4" checked="checked" />
-                    <label for="test4">全国总代理商</label>
-                </p>
-                <p>
-                    <input type="checkbox" id="test5" checked="checked" />
-                    <label for="test5">战略合作伙伴</label>
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
-
-
 </div>
+
+
 
 
 

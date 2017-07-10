@@ -5,10 +5,16 @@ package com.xt.service.impl;/**
 import com.xt.entity.Role;
 import com.xt.entity.User;
 import com.xt.mapper.RoleMapper;
+import com.xt.mapper.UserMapper;
+import com.xt.service.RolePermService;
 import com.xt.service.RoleService;
+import com.xt.service.UserRoleService;
+import com.xt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,14 +26,28 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RolePermService rolePermService;
+    @Autowired
+    private UserRoleService userRoleService;
 
     @Override
-    public User createRole(Role role) {
-        return roleMapper.createRole(role);
+    public void createRole(Role role) {
+        roleMapper.createRole(role);
     }
 
     @Override
     public void deleteRole(Long roleId) {
+        Role role = roleMapper.findById(roleId);
+        //删除下属用户
+        userService.deleteUserByRole(role.getRole());
+        //删除用户角色关系
+        userRoleService.removeByRole(role.getRole());
+        //删除角色权限关系
+        rolePermService.removeByRole(role.getRole());
+        //删除角色
         roleMapper.deleteRole(roleId);
     }
 
@@ -37,7 +57,27 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public Role findByRole(String role) {
+        return roleMapper.findByRole(role);
+    }
+
+    @Override
     public List<Role> findAll() {
         return roleMapper.findAll();
+    }
+
+    @Override
+    public List<Role> findAllExceptAdmin() {
+        List<Role> roles = findAll();
+        List<Role> del = new ArrayList<>();
+        Iterator<Role> iterator = roles.iterator();
+        while (iterator.hasNext()){
+            Role role = iterator.next();
+            if(role.getRole().equals("admin")){
+                del.add(role);
+            }
+        }
+        roles.removeAll(del);
+        return roles;
     }
 }

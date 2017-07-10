@@ -9,11 +9,13 @@ import java.util.Set;
  * Created by Administrator on 2017/7/5.
  */
 public interface UserService {
-    User createUser(User user);
+    void createUser(User user);
 
     void updateUser(User user);
 
     void deleteUser(Long userId);
+
+    void deleteUserByRole(String role);
 
     User findById(Long userId);
 

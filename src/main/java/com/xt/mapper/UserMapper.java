@@ -10,11 +10,13 @@ import java.util.Set;
  */
 public interface UserMapper {
 
-    User createUser(User user);
+    void createUser(User user);
 
     void updateUser(User user);
 
     void deleteUser(Long userId);
+
+    void deleteUserByRole(String role);
 
     User findById(Long userId);
 

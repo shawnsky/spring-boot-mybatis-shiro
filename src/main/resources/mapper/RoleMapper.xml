@@ -31,6 +31,14 @@
 	   WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
+    <select id="findByRole" parameterType="String" resultType="Role">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_roles
+        WHERE
+        role = #{value,jdbcType=VARCHAR}
+    </select>
+
     <select id="findAll" resultType="Role">
         SELECT
         <include refid="Base_Column_List" />

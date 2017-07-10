@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xt.mapper.UserRoleMapper" >
+    
+    <sql id="Base_Column_List" >
+        id, user_id, role_id
+    </sql>
+
+
+    <delete id="removeByRole" parameterType="String">
+        DELETE ur FROM sys_user_role ur, sys_roles r
+        WHERE
+        r.role = #{value,jdbcType=VARCHAR} AND ur.role_id = r.id
+    </delete>
+
+    <insert id="add" parameterType="UserRole">
+        INSERT INTO sys_user_role
+        (user_id, role_id)
+        VALUES
+        (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+    </insert>
+
+
+
+
+
+</mapper>

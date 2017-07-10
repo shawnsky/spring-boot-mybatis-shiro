@@ -3,8 +3,11 @@ package com.xt.web;
  * Created by Administrator on 2017/7/5.
  */
 
+import com.xt.entity.Permission;
 import com.xt.entity.Role;
 import com.xt.entity.User;
+import com.xt.service.PermissionService;
+import com.xt.service.RolePermService;
 import com.xt.service.RoleService;
 import com.xt.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -15,12 +18,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 07-05 16:34
@@ -33,17 +35,21 @@ public class BaseController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RolePermService rolePermService;
+    @Autowired
+    private PermissionService  permissionService;
 
     @RequestMapping("/")
     public String index(Model model){
-        //用户角色名
+        //登录用户信息
         Subject subject = SecurityUtils.getSubject();
         Set<String> roleNames = userService.findRoleNames(subject.getPrincipal().toString());
         String roleName = roleNames.iterator().next();
         model.addAttribute("roleName",roleName);
 
-        //所有角色
-        List<Role> allRoles = roleService.findAll();
+        //除管理员以外所有角色
+        List<Role> allRoles = roleService.findAllExceptAdmin();
         model.addAttribute("allRoles", allRoles);
 
         return "index";
@@ -103,11 +109,6 @@ public class BaseController {
         return "auth_book";
     }
 
-
-    @RequestMapping("/updatePermission")
-    public String updatePermission(){
-        return "update_permission";
-    }
 
 
 

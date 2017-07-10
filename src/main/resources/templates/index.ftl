@@ -55,9 +55,11 @@
             <li class="bold"><a class="collapsible-header waves-effect waves-teal">系统管理</a>
                 <div class="collapsible-body">
                     <ul>
-                        <li><a href="javascript:void(0);">添加代理</a></li>
-                        <li><a href="javascript:void(0);">管理代理</a></li>
-                        <li><a href="javascript:get('updatePermission');">权限变更<span class="new badge"></span></a></li>
+                        <li><a href="javascript:get('admin/createUser');">添加用户</a></li>
+                        <li><a href="javascript:void(0);">管理用户</a></li>
+                        <li><a href="javascript:get('admin/createRole');">添加角色</a></li>
+                        <li><a href="javascript:get('admin/manageRoles');">管理角色</a></li>
+                        <li><a href="javascript:get('admin/updatePermission');">权限变更<span class="new badge"></span></a></li>
                     </ul>
                 </div>
             </li>
@@ -73,7 +75,7 @@
 
 <main style="padding-left: 300px;">
     <div id="content">
-
+        <h5 style="padding-left: 50px;">欢迎</h5>
     </div>
 
 </main>

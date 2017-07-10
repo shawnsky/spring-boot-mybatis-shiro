@@ -7,6 +7,10 @@
     </sql>
 
     <insert id="createUser" parameterType="User" >
+            <selectKey keyProperty="id" order="AFTER" resultType="Long">
+            SELECT LAST_INSERT_ID()
+            </selectKey>
+
             INSERT INTO sys_users
             (username,password,salt)
             VALUES
@@ -30,6 +34,13 @@
         DELETE FROM sys_users
         WHERE
         id=#{id,jdbcType=BIGINT}
+    </delete>
+
+
+    <delete id="deleteUserByRole" parameterType="String">
+        DELETE u FROM sys_users u, sys_user_role ur, sys_roles r
+        WHERE
+        r.role = #{value,jdbcType=VARCHAR} AND r.id = ur.role_id AND u.id = ur.user_id
     </delete>
 
 
