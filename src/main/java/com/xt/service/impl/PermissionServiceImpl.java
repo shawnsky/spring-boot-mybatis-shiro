@@ -14,12 +14,13 @@ import java.util.List;
  * 07-10 10:27
  *
  * @author xt
- **/
+ */
 @Service("permissionService")
 public class PermissionServiceImpl implements PermissionService {
 
     @Autowired
     private PermissionMapper permissionMapper;
+
     @Override
     public void createPermission(Permission permission) {
         permissionMapper.createPermission(permission);

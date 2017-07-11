@@ -57,10 +57,23 @@
         </dependency>
 
 
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+        </dependency>
+
+
+
         <!--freemarker-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.mingsoft</groupId>
+            <artifactId>shiro-freemarker-tags</artifactId>
+            <version>0.1</version>
         </dependency>
 
 
@@ -84,17 +97,7 @@
             <version>1.2.2</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.shiro</groupId>-->
-            <!--<artifactId>shiro-quartz</artifactId>-->
-            <!--<version>1.2.2</version>-->
-        <!--</dependency>-->
 
-        <dependency>
-            <groupId>net.mingsoft</groupId>
-            <artifactId>shiro-freemarker-tags</artifactId>
-            <version>0.1</version>
-        </dependency>
 
 
 

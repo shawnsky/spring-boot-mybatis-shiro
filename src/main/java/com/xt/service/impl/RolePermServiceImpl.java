@@ -8,7 +8,7 @@ import com.xt.entity.RolePermission;
 import com.xt.mapper.PermissionMapper;
 import com.xt.mapper.RoleMapper;
 import com.xt.mapper.RolePermMapper;
-import com.xt.service.RolePermService;
+import com.xt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +21,14 @@ import java.util.*;
  **/
 @Service("rolePermService")
 public class RolePermServiceImpl implements RolePermService {
+
     @Autowired
     private RolePermMapper rolePermMapper;
+
     @Autowired
-    private RoleMapper roleMapper;
+    private PermissionService permissionService;
     @Autowired
-    private PermissionMapper permissionMapper;
+    private RoleService roleService;
 
     @Override
     public void add(RolePermission rolePermission) {
@@ -61,7 +63,7 @@ public class RolePermServiceImpl implements RolePermService {
     @Override
     public Map<String, Set<String>> getPermissionRolesMap() {
         Map<String, Set<String>> map = new HashMap<>();
-        List<Permission> permissions = permissionMapper.findAll();
+        List<Permission> permissions = permissionService.findAll();
         for(Permission p:permissions){
             map.put(p.getDescription(), rolePermMapper.findRolesByPermission(p.getPermission()));
         }
@@ -71,11 +73,12 @@ public class RolePermServiceImpl implements RolePermService {
     @Override
     public void setPermissionRolesMap(Map<Long, Set<String>> map) {
         removeAll();
-        for(Permission p:permissionMapper.findAll()){
+        List<Permission> permissions = permissionService.findAll();
+        for(Permission p:permissions){
             //add admin
             RolePermission adminPermission = new RolePermission();
             adminPermission.setPermissionId(p.getId());
-            adminPermission.setRoleId(roleMapper.findByRole("admin").getId());
+            adminPermission.setRoleId(roleService.findByRole("admin").getId());
             rolePermMapper.add(adminPermission);
 
             Set<String> roles = map.get(p.getId());
@@ -83,7 +86,7 @@ public class RolePermServiceImpl implements RolePermService {
             while (iterator.hasNext()){
                 RolePermission rp = new RolePermission();
                 rp.setPermissionId(p.getId());
-                rp.setRoleId(roleMapper.findByRole(iterator.next()).getId());
+                rp.setRoleId(roleService.findByRole(iterator.next()).getId());
                 rolePermMapper.add(rp);
             }
 

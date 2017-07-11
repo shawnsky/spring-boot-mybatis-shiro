@@ -2,6 +2,7 @@ package com.xt;/**
  * Created by Administrator on 2017/7/6.
  */
 
+import com.xt.shiro.SessionRedisDao;
 import com.xt.shiro.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -86,7 +87,8 @@ public class ShiroConfiguration {
      */
     @Bean(name = "enterpriseCacheSessionDAO")
     public EnterpriseCacheSessionDAO getEnterpriseCacheSessionDAO() {
-        EnterpriseCacheSessionDAO enterpriseCacheSessionDAO = new EnterpriseCacheSessionDAO();
+//        EnterpriseCacheSessionDAO enterpriseCacheSessionDAO = new EnterpriseCacheSessionDAO();
+        EnterpriseCacheSessionDAO enterpriseCacheSessionDAO = new SessionRedisDao();//使用自己的DAO
         enterpriseCacheSessionDAO.setActiveSessionsCacheName("shiro-activeSessionCache");
         enterpriseCacheSessionDAO.setSessionIdGenerator(getJavaUuidSessionIdGenerator());
         return enterpriseCacheSessionDAO;

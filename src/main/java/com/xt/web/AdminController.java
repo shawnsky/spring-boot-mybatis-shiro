@@ -6,14 +6,13 @@ import com.xt.entity.Permission;
 import com.xt.entity.Role;
 import com.xt.entity.User;
 import com.xt.entity.UserRole;
-import com.xt.service.*;
-import org.apache.shiro.crypto.hash.Md5Hash;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xt.service.impl.ServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import redis.clients.jedis.JedisPool;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -25,20 +24,7 @@ import java.util.*;
  **/
 @Controller
 @RequestMapping(value = "/admin")
-public class AdminController {
-
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private RolePermService rolePermService;
-    @Autowired
-    private PermissionService permissionService;
-    @Autowired
-    private UserRoleService userRoleService;
-
-
+public class AdminController extends ServiceImpl {
 
     @RequestMapping("/createUser")
     public String createUser(Model model){

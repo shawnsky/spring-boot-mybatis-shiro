@@ -3,22 +3,18 @@ package com.xt.web;
  * Created by Administrator on 2017/7/5.
  */
 
-import com.xt.entity.Permission;
 import com.xt.entity.Role;
 import com.xt.entity.User;
-import com.xt.service.PermissionService;
-import com.xt.service.RolePermService;
-import com.xt.service.RoleService;
-import com.xt.service.UserService;
+import com.xt.service.impl.ServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,15 +26,10 @@ import java.util.*;
  * @author xt
  **/
 @Controller
-public class BaseController {
+public class HomeController extends ServiceImpl {
+
     @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private RolePermService rolePermService;
-    @Autowired
-    private PermissionService  permissionService;
+    private StringRedisTemplate stringRedisTemplate;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -100,7 +91,6 @@ public class BaseController {
 
     @RequestMapping("/developAgent")
     public String developAgent(Model model){
-        model.addAttribute("message","开发代理。。。");
         return "develop_agent";
     }
 

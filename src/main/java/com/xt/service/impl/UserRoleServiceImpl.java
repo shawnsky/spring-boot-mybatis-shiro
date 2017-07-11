@@ -28,4 +28,5 @@ public class UserRoleServiceImpl implements UserRoleService {
     public void removeByRole(String role) {
         userRoleMapper.removeByRole(role);
     }
+
 }

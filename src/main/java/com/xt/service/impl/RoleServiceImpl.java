@@ -6,10 +6,7 @@ import com.xt.entity.Role;
 import com.xt.entity.User;
 import com.xt.mapper.RoleMapper;
 import com.xt.mapper.UserMapper;
-import com.xt.service.RolePermService;
-import com.xt.service.RoleService;
-import com.xt.service.UserRoleService;
-import com.xt.service.UserService;
+import com.xt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +20,16 @@ import java.util.List;
  * @author xt
  **/
 @Service("roleService")
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl  implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
+
     @Autowired
     private UserService userService;
     @Autowired
-    private RolePermService rolePermService;
-    @Autowired
     private UserRoleService userRoleService;
+    @Autowired
+    private RolePermService rolePermService;
 
     @Override
     public void createRole(Role role) {
