@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 07-11 11:28
@@ -28,7 +29,7 @@ public class SessionRedisDao extends EnterpriseCacheSessionDAO {
     @Override
     protected void doUpdate(Session session) {
         super.doUpdate(session);
-        redisTemplate.opsForValue().set(session.getId().toString(),session);
+        redisTemplate.opsForValue().set(session.getId().toString(),session,30, TimeUnit.MINUTES);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class SessionRedisDao extends EnterpriseCacheSessionDAO {
     @Override
     protected Serializable doCreate(Session session) {
         Serializable sessionId = super.doCreate(session);
-        redisTemplate.opsForValue().set(sessionId.toString(), session);
+        redisTemplate.opsForValue().set(sessionId.toString(), session,30,TimeUnit.MINUTES);
         return sessionId;
     }
 

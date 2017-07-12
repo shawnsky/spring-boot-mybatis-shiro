@@ -28,8 +28,6 @@ import java.util.*;
 @Controller
 public class HomeController extends ServiceImpl {
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
 
     @RequestMapping("/")
     public String index(Model model){

@@ -56,7 +56,8 @@ public class ShiroConfiguration {
 
     /**
      * Gets eh cache manager.
-     * 缓存管理器，暂时用ehcache实现
+     * 缓存管理器，用ehcache实现
+     * 参与了Session缓存和授权信息缓存
      * @return the eh cache manager
      */
     @Bean(name = "shiroEhcacheManager")
@@ -121,7 +122,7 @@ public class ShiroConfiguration {
     @Bean(name="defaultWebSessionManager")
     public DefaultWebSessionManager getDefaultWebSessionManager(){
         DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
-        defaultWebSessionManager.setGlobalSessionTimeout(1800000);
+        defaultWebSessionManager.setGlobalSessionTimeout(1800000);//30m
         defaultWebSessionManager.setDeleteInvalidSessions(true);
         defaultWebSessionManager.setSessionDAO(getEnterpriseCacheSessionDAO());
         defaultWebSessionManager.setSessionIdCookie(getSimpleCookie());
@@ -139,7 +140,7 @@ public class ShiroConfiguration {
         SimpleCookie simpleCookie = new SimpleCookie();
         simpleCookie.setName("rememberMe");
         simpleCookie.setHttpOnly(true);
-        simpleCookie.setMaxAge(2592000);//30 days
+        simpleCookie.setMaxAge(2592000);//30d
         return simpleCookie;
     }
 
