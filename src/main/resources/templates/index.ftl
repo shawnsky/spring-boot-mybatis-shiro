@@ -56,7 +56,7 @@
                 <div class="collapsible-body">
                     <ul>
                         <li><a href="javascript:get('admin/createUser');">添加用户</a></li>
-                        <li><a href="javascript:void(0);">管理用户</a></li>
+                        <li><a href="javascript:get('admin/manageUser');">管理用户</a></li>
                         <li><a href="javascript:get('admin/createRole');">添加角色</a></li>
                         <li><a href="javascript:get('admin/manageRoles');">管理角色</a></li>
                         <li><a href="javascript:get('admin/updatePermission');">权限变更<span class="new badge"></span></a></li>

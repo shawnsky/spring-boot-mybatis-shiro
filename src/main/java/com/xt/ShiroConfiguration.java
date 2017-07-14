@@ -122,8 +122,8 @@ public class ShiroConfiguration {
     @Bean(name="defaultWebSessionManager")
     public DefaultWebSessionManager getDefaultWebSessionManager(){
         DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
-        defaultWebSessionManager.setGlobalSessionTimeout(1800000);//30m
-        defaultWebSessionManager.setDeleteInvalidSessions(true);
+//        defaultWebSessionManager.setGlobalSessionTimeout(1800000);//30m
+//        defaultWebSessionManager.setDeleteInvalidSessions(true);
         defaultWebSessionManager.setSessionDAO(getEnterpriseCacheSessionDAO());
         defaultWebSessionManager.setSessionIdCookie(getSimpleCookie());
         defaultWebSessionManager.setSessionIdCookieEnabled(true);

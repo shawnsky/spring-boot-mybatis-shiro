@@ -5,6 +5,7 @@ package com.xt.shiro;/**
 import com.xt.entity.User;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
+import org.apache.shiro.session.mgt.ValidatingSession;
 import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class SessionRedisDao extends EnterpriseCacheSessionDAO {
 
     @Override
     protected void doUpdate(Session session) {
+        if(session instanceof ValidatingSession && !((ValidatingSession)session).isValid()){
+            return;
+        }
         super.doUpdate(session);
         redisTemplate.opsForValue().set(session.getId().toString(),session,30, TimeUnit.MINUTES);
     }
@@ -47,7 +51,8 @@ public class SessionRedisDao extends EnterpriseCacheSessionDAO {
 
     @Override
     protected Session doReadSession(Serializable sessionId) {
-        Session session = super.doReadSession(sessionId);
+
+        Session session = super.doReadSession(sessionId);//先从ehcache读 缓存3600秒
         if(session==null){
             session = redisTemplate.opsForValue().get(sessionId.toString());
         }

@@ -55,6 +55,20 @@ public class AdminController extends ServiceImpl {
         return "redirect:/";
     }
 
+    @RequestMapping("/manageUser")
+    public String manageUser(Model model){
+        List<Role> roles = roleService.findAll();
+        model.addAttribute("roles",roles);
+
+        List<User> users = new ArrayList<>();
+        for (Role role:roles){
+            users.addAll(userService.findByRole(role.getRole()));
+        }
+        model.addAttribute("users",users);
+        return "manage_user";
+    }
+
+
     @RequestMapping("/createRole")
     public String createRole(){
         return "create_role";
