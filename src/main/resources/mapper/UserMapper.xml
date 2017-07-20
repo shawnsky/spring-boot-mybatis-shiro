@@ -43,6 +43,16 @@
         r.role = #{value,jdbcType=VARCHAR} AND r.id = ur.role_id AND u.id = ur.user_id
     </delete>
 
+    <select id="findAll" resultType="User">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_users
+    </select>
+
+    <select id="count" resultType="Long">
+        SELECT COUNT(*) FROM sys_users
+    </select>
+
 
 
     <select id="findById" parameterType="Long" resultType="User" >

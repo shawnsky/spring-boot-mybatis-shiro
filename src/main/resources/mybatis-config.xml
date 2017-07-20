@@ -8,4 +8,16 @@
 		<typeAlias alias="Set" type="java.util.HashSet"/>
 		<typeAlias alias="String" type="java.lang.String"/>
 	</typeAliases>
+
+	<plugins>
+		<!-- com.github.pagehelper为PageHelper类所在包名 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+			<property name="helperDialect" value="mysql"/>
+			<property name="reasonable" value="true"/>
+			<property name="supportMethodsArguments" value="true"/>
+
+		</plugin>
+	</plugins>
+
 </configuration>

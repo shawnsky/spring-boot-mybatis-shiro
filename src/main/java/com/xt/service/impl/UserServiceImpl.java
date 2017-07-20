@@ -8,6 +8,7 @@ import com.xt.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.Inet4Address;
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +43,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserByRole(String role) {
         userMapper.deleteUserByRole(role);
+    }
+
+    @Override
+    public List<User> findAll(Integer pageNum, Integer pageSize) {
+        return userMapper.findAll(pageNum, pageSize);
+    }
+
+    @Override
+    public Integer getTotalPageNum(Integer pageSize) {
+        return userMapper.count().intValue() / pageSize;
     }
 
     @Override

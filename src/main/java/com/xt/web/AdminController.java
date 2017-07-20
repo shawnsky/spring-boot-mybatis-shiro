@@ -2,6 +2,7 @@ package com.xt.web;/**
  * Created by Administrator on 2017/7/10.
  */
 
+import com.github.pagehelper.Page;
 import com.xt.entity.Permission;
 import com.xt.entity.Role;
 import com.xt.entity.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.JedisPool;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -56,15 +58,28 @@ public class AdminController extends ServiceImpl {
     }
 
     @RequestMapping("/manageUser")
-    public String manageUser(Model model){
+    public String manageUser(Model model, HttpServletRequest request, HttpServletResponse response){
+        //当前页数
+        String page = request.getParameter("page");
+        int currentPage = page==null?1:Integer.parseInt(page);
+        model.addAttribute("currentPage", currentPage);
+
+
+        //分页查询
+        List<User> users = userService.findAll(currentPage,3);
+        model.addAttribute("users",users);
+
+
+        //所有角色
         List<Role> roles = roleService.findAll();
         model.addAttribute("roles",roles);
 
-        List<User> users = new ArrayList<>();
-        for (Role role:roles){
-            users.addAll(userService.findByRole(role.getRole()));
-        }
-        model.addAttribute("users",users);
+
+        //总页数
+        int totalPageNum = userService.getTotalPageNum(3);
+        model.addAttribute("totalPageNum", totalPageNum);
+
+
         return "manage_user";
     }
 
@@ -130,6 +145,15 @@ public class AdminController extends ServiceImpl {
         }
         rolePermService.setPermissionRolesMap(map);
         return "redirect:/";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/page")
+    public List<User> page(){
+        List<User> users = userService.findAll(0,0);
+
+        return users;
     }
 
 

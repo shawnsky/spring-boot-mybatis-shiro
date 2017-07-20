@@ -1,6 +1,7 @@
 package com.xt.service;
 
 import com.xt.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,10 @@ public interface UserService {
     void deleteUser(Long userId);
 
     void deleteUserByRole(String role);
+
+    List<User> findAll(Integer pageNum, Integer pageSize);
+
+    Integer getTotalPageNum(Integer pageSize);
 
     User findById(Long userId);
 

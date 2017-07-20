@@ -1,6 +1,7 @@
 package com.xt.mapper;
 
 import com.xt.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -37,6 +38,20 @@ public interface UserMapper {
      * @param role the role
      */
     void deleteUserByRole(String role);
+
+    /**
+     * Find all user.
+     * 分页查询所有用户
+     * @param pageNum page num
+     * @param pageSize the size
+     */
+    List<User> findAll(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
+
+    /**
+     * Get data count.
+     * 查询用户表条数
+     */
+    Long count();
 
     /**
      * Find by id user.
